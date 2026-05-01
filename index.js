@@ -297,6 +297,21 @@ app.use((err, req, res, next) => {
   res.status(500).json({ ok: false, error: "Error interno del servidor" })
 })
 
-app.listen(PORT, () => {
-  console.log(`API Biblioteca en http://localhost:${PORT}`)
+const server = app.listen(PORT, () => {
+  const addr = server.address()
+  const puertoReal = typeof addr === "object" && addr ? addr.port : PORT
+  console.log(`API Biblioteca en http://127.0.0.1:${puertoReal} (y http://localhost:${puertoReal})`)
+})
+
+server.on("error", (err) => {
+  if (err.code === "EADDRINUSE") {
+    console.error(
+      `No se pudo iniciar: el puerto ${PORT} ya está en uso.\n` +
+        "Cierra la otra instancia de Node (p. ej. servidor_malo.js o una terminal con npm start anterior) " +
+        "o usa otro puerto: en PowerShell $env:PORT=3001; npm start"
+    )
+  } else {
+    console.error(err)
+  }
+  process.exit(1)
 })
