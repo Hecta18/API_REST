@@ -1,0 +1,28 @@
+# Dependencias
+node_modules/
+
+# npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Variables de entorno (credenciales, puertos, etc.)
+.env
+.env.*
+!.env.example
+
+# Logs y dumps locales
+logs/
+*.log
+
+# Cobertura de pruebas (si agregas Jest, etc.)
+coverage/
+.nyc_output/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Herramientas / IDE (opcional; quita la línea si quieres versionar ajustes del equipo)
+.idea/
